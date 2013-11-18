@@ -326,10 +326,12 @@ class Configatron
     rescue Exception => e
     end
 
-    if RUBY_PLATFORM == 'java'
-      SYCK_CONSTANT = YAML::Yecht::MergeKey
-    else
-      SYCK_CONSTANT = (RUBY_VERSION.match(/^1\.9/) ? Syck::MergeKey : YAML::Syck::MergeKey)
+    if RUBY_VERSION.match(/^1\.9\.[^1]/)
+      if RUBY_PLATFORM == 'java'
+        SYCK_CONSTANT = YAML::Yecht::MergeKey
+      else
+        SYCK_CONSTANT = (RUBY_VERSION.match(/^1\.9/) ? Syck::MergeKey : YAML::Syck::MergeKey)
+      end
     end
 
   end # Store
